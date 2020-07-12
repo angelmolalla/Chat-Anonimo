@@ -45,13 +45,18 @@ class NavigationBar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/users">
-                Users
+              <a className="nav-link" href="/categories">
+                Chat category's
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/addCategory">
                 AddCategory
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/users">
+                Users
               </a>
             </li>
             <li className="nav-item">

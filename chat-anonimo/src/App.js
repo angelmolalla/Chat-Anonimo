@@ -9,6 +9,8 @@ import * as firebase from "firebase";
 import Users from "./components/Users";
 import NewUser from "./components/NewUser";
 import AddCategory from "./components/AddCategory";
+import Categories from "./components/Categories";
+import ChatCategory from "./components/ChatCategory";
 
 export const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 export const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
@@ -41,9 +43,11 @@ function App() {
         <Route exact path="/" component={NewUser}></Route>
         <Route exact path="/about" component={About}></Route>
         <Route exact path="/chatGlobal" component={ChatGlobal}></Route>
+        <Route exact path="/chatCategory/:id" component={ChatCategory}></Route>
         <Route exact path="/addUser" component={AddUser}></Route>
         <Route exact path="/users" component={Users}></Route>
         <Route exact path="/addCategory" component={AddCategory}></Route>
+        <Route exact path="/categories" component={Categories}></Route>
         </Switch>
       </Router>
     </React.Fragment>

@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import NavigationBar from "./components/NavigationBar";
 import ChatRoom from "./components/ChatRoom";
+import AddUser from "./components/AddUser";
 import * as firebase from "firebase";
 
 export const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
@@ -37,8 +38,7 @@ function App() {
         <Route exact path="/" component={Home}></Route>
         <Route exact path="/about" component={About}></Route>
         <Route exact path="/chatRoom" component={ChatRoom}></Route>
-
-        
+        <Route exact path="/addUser" component={AddUser}></Route>
         </Switch>
       </Router>
     </React.Fragment>

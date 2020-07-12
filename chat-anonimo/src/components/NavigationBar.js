@@ -55,6 +55,11 @@ class NavigationBar extends Component {
                 Users
               </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/addCategory">
+              AddCategory
+              </a>
+            </li>
           </ul>
           {this.state.nick}
         </div>

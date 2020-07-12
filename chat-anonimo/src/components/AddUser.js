@@ -37,6 +37,7 @@ class AddUser extends Component {
     const user = {
       id: this.state.users.length,
       nick: this.state.user,
+      anonymous:false,
     };
     const validateNick = this.state.users
       .map(function (e) {

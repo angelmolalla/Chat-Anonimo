@@ -6,6 +6,7 @@ import NavigationBar from "./components/NavigationBar";
 import ChatRoom from "./components/ChatRoom";
 import AddUser from "./components/AddUser";
 import * as firebase from "firebase";
+import Users from "./components/Users";
 
 export const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 export const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/about" component={About}></Route>
         <Route exact path="/chatRoom" component={ChatRoom}></Route>
         <Route exact path="/addUser" component={AddUser}></Route>
+        <Route exact path="/users" component={Users}></Route>
         </Switch>
       </Router>
     </React.Fragment>

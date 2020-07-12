@@ -27,21 +27,20 @@ class NewUser extends Component {
   }
   messageUser() {
     Swal.fire({
-      title: "Desea utilizar un usuario anonimo?",
-      text: "El usuario anonimo sera aleatorio",
+      title: "Are you want to use an anonymous user?",
+      text: "Anonymous user will be random",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si",
-      cancelButtonText: "No, quiero crear un nuevo usuario!",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No, I want to create a new user!",
     }).then((result) => {
       if (result.value) {
         let lastKey =this.state.users.length;
         let nick="anonymous"+lastKey;
         this.addUser(nick);
-
-        Swal.fire("Inicio sección como anonimo", "Su nick: "+nick, "success");
+        Swal.fire("Login as anonymous", "His nick is: "+nick, "success");
       } else {
         this.props.history.push("/addUser");
       }

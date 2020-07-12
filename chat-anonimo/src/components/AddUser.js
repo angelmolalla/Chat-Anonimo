@@ -49,7 +49,7 @@ class AddUser extends Component {
       Swal.fire({
         title: "Error",
         icon: "error",
-        text: "El nick esta vacio",
+        text: "Nick is empty",
       });
       return;
     }
@@ -58,7 +58,7 @@ class AddUser extends Component {
       Swal.fire({
         title: "Error",
         icon: "error",
-        text: "El nick ya esta en uso",
+        text: "The nick is already in use",
       });
       return;
     }
@@ -69,8 +69,8 @@ class AddUser extends Component {
     sessionStorage.setItem('nick', this.state.user);
     sessionStorage.setItem('anonymous',false);
     Swal.fire(
-      "Operación correcta!",
-      "Nuevo usuario agregado, con el nick: " + this.state.user,
+      "Correct Operation!",
+      "New user added, nick: " + this.state.user,
       "success"
     );
     this.setState({ user: "" });

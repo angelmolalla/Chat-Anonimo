@@ -25,7 +25,7 @@ class ChatGlobal extends Component {
     }
     firebase
       .database()
-      .ref("messagesGlobal/")
+      .ref("messages_global/")
       .on("value", (snapshot) => {
         const currentMessages = snapshot.val();
         if (currentMessages !== null) {
@@ -45,7 +45,7 @@ class ChatGlobal extends Component {
       date: Date.now(),
     };
     this.setState({ messages: listMessage });
-    firebase.database().ref(`messagesGlobal/${message.id}`).set(message);
+    firebase.database().ref(`messages_global/${message.id}`).set(message);
     this.setState({ message: "" });
   }
   render() {
@@ -53,7 +53,7 @@ class ChatGlobal extends Component {
     const messageList = messages.map((message) => {
       if (message.user == sessionStorage.getItem("nick")) {
         return (
-          <div className="alert alert-dismissible alert-success">
+          <div className="alert alert-dismissible alert-success" key={this.state.messages.length}>
             <button type="button" className="close" data-dismiss="alert">
               &times;
             </button>
@@ -73,7 +73,7 @@ class ChatGlobal extends Component {
         );
       } else {
         return (
-          <div className="alert alert-dismissible alert-secondary">
+          <div className="alert alert-dismissible alert-secondary" key={this.state.messages.length}>
             <div className="row">
               <div className="col-md-6">
                 <strong className="mr-auto">{message.user}</strong>

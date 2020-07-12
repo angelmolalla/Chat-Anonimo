@@ -88,7 +88,7 @@ class ChatCategory extends Component {
     const messageList = messages.map((message) => {
       if (message.user == sessionStorage.getItem("nick")) {
         return (
-          <div className="alert alert-dismissible alert-success">
+          <div className="alert alert-dismissible alert-success" key={this.state.messages.length}>
             <button type="button" className="close" data-dismiss="alert">
               &times;
             </button>

@@ -19,7 +19,11 @@ class NewUser extends Component {
       anonymous: true,
     };
     this.setState({ users: listUser });
+    sessionStorage.setItem('nick',nick);
+    sessionStorage.setItem('id', this.state.users.length);
+    sessionStorage.setItem('anonymous',true);
     firebase.database().ref(`users/${user.id}`).set(user);
+
   }
   messageUser() {
     Swal.fire({
@@ -36,6 +40,7 @@ class NewUser extends Component {
         let lastKey =this.state.users.length;
         let nick="anonymous"+lastKey;
         this.addUser(nick);
+
         Swal.fire("Inicio sección como anonimo", "Su nick: "+nick, "success");
       } else {
         this.props.history.push("/addUser");

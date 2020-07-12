@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import './ChatRoom.css';
-
+import "./ChatRoom.css";
+import validateUser from "./ValidateUser";
+import Moment from "react-moment";
 class ChatRoom extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +19,10 @@ class ChatRoom extends Component {
   }
 
   componentDidMount() {
+    const valid = validateUser();
+    if (valid) {
+      this.props.history.push("/");
+    }
     firebase
       .database()
       .ref("messages/")
@@ -36,6 +41,8 @@ class ChatRoom extends Component {
     const message = {
       id: this.state.messages.length,
       text: this.state.message,
+      user: sessionStorage.getItem("nick"),
+      date: Date.now(),
     };
     this.setState({ messages: listMessage });
     firebase.database().ref(`messages/${message.id}`).set(message);
@@ -44,14 +51,44 @@ class ChatRoom extends Component {
   render() {
     const { messages } = this.state;
     const messageList = messages.map((message) => {
-      return (
-        <div className="alert alert-dismissible alert-success"  key={message.id}>
-          <button type="button" className="close" data-dismiss="alert">
-            &times;
-          </button>
-          {message.text}
-        </div>
-      );
+      if (message.user == sessionStorage.getItem("nick")) {
+        return (
+          <div className="alert alert-dismissible alert-success">
+            <button type="button" className="close" data-dismiss="alert">
+              &times;
+            </button>
+            <div className="row">
+              <div className="col-md-6">
+                <strong className="mr-auto">{message.user}</strong>
+              </div>
+              <div className="col-md-6">
+                <small>
+                  <Moment>{message.date}</Moment>
+                </small>
+              </div>
+            </div>
+            <hr />
+            {message.text}
+          </div>
+        );
+      } else {
+        return (
+          <div className="alert alert-dismissible alert-secondary">
+            <div className="row">
+              <div className="col-md-6">
+                <strong className="mr-auto">{message.user}</strong>
+              </div>
+              <div className="col-md-6">
+                <small>
+                  <Moment>{message.date}</Moment>
+                </small>
+              </div>
+            </div>
+            <hr />
+            {message.text}
+          </div>
+        );
+      }
     });
     return (
       <div className="container-fluid">
@@ -59,7 +96,7 @@ class ChatRoom extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div  className="col-md-6 addScroll">{messageList}</div>
+              <div className="col-md-6 addScroll">{messageList}</div>
               <div className="col-md-6">
                 <form role="form" onSubmit={this.handleSubmit}>
                   <div className="form-group">
@@ -70,11 +107,6 @@ class ChatRoom extends Component {
                       value={this.state.message}
                       onChange={this.updateMessage}
                     />
-                  </div>
-                  <div className="checkbox">
-                    <label>
-                      <input type="checkbox" /> Check me out
-                    </label>
                   </div>
                   <button className="btn btn-primary">Send</button>
                 </form>

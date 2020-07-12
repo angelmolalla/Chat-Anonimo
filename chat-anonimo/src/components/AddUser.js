@@ -65,6 +65,9 @@ class AddUser extends Component {
 
     this.setState({ users: listUser });
     firebase.database().ref(`users/${user.id}`).set(user);
+    sessionStorage.setItem('id', this.state.users.length);
+    sessionStorage.setItem('nick', this.state.user);
+    sessionStorage.setItem('anonymous',false);
     Swal.fire(
       "Operación correcta!",
       "Nuevo usuario agregado, con el nick: " + this.state.user,
@@ -90,7 +93,7 @@ class AddUser extends Component {
                       onChange={this.updateUser}
                     />
                   </div>
-                  <button className="btn btn-primary">Send</button>
+                  <button className="btn btn-primary">Save</button>
                 </form>
               </div>
             </div>

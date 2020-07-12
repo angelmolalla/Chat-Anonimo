@@ -1,6 +1,20 @@
 import React, { Component } from "react";
+import validateUser from "./ValidateUser";
 
 class NavigationBar extends Component {
+  constructor(props) {
+    super(props);
+    const valid = validateUser();
+    if (valid) {
+      this.state = {
+        nick: "Sin Usuario",
+      };
+    } else {
+      this.state = {
+        nick: sessionStorage.getItem("nick"),
+      };
+    }
+  }
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -42,6 +56,7 @@ class NavigationBar extends Component {
               </a>
             </li>
           </ul>
+          {this.state.nick}
         </div>
       </nav>
     );

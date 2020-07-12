@@ -16,9 +16,10 @@ class AddCategory extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const listCategory = this.state.categories;
+    const categoryReplace = this.state.category.replace(/ /g, "");
     const category = {
       id: this.state.categories.length,
-      category: this.state.category
+      category: categoryReplace,
     };
     const validateCategory = this.state.categories
       .map(function (e) {
@@ -113,6 +114,7 @@ class AddCategory extends Component {
                       value={this.state.category}
                       onChange={this.updateCategory}
                     />
+                     <small className="form-text text-muted">Blank spaces will be removed</small>
                   </div>
                   <button className="btn btn-primary">Add</button>
                 </form>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./ChatRoom.css";
+import "./Chat.css";
 import Swal from "sweetalert2";
 
 class AddUser extends Component {
@@ -78,7 +78,7 @@ class AddUser extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <legend>ChatRoom</legend>
+        <legend>New User</legend>
         <div className="row">
           <div className="col-md-12">
             <div className="row">

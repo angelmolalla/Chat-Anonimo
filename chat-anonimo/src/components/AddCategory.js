@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./ChatRoom.css";
+import "./Chat.css";
 import Swal from "sweetalert2";
 class AddCategory extends Component {
   constructor(props) {

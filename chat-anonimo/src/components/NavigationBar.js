@@ -32,7 +32,6 @@ class NavigationBar extends Component {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
@@ -41,13 +40,8 @@ class NavigationBar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/about">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/chatRoom">
-                ChatRoom
+              <a className="nav-link" href="/chatGlobal">
+                Chat Global
               </a>
             </li>
             <li className="nav-item">
@@ -57,7 +51,12 @@ class NavigationBar extends Component {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/addCategory">
-              AddCategory
+                AddCategory
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/about">
+                About
               </a>
             </li>
           </ul>

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./ChatRoom.css";
+import "./Chat.css";
 import validateUser from "./ValidateUser";
 import Moment from "react-moment";
-class ChatRoom extends Component {
+class ChatGlobal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class ChatRoom extends Component {
     }
     firebase
       .database()
-      .ref("messages/")
+      .ref("messagesGlobal/")
       .on("value", (snapshot) => {
         const currentMessages = snapshot.val();
         if (currentMessages !== null) {
@@ -45,7 +45,7 @@ class ChatRoom extends Component {
       date: Date.now(),
     };
     this.setState({ messages: listMessage });
-    firebase.database().ref(`messages/${message.id}`).set(message);
+    firebase.database().ref(`messagesGlobal/${message.id}`).set(message);
     this.setState({ message: "" });
   }
   render() {
@@ -92,7 +92,7 @@ class ChatRoom extends Component {
     });
     return (
       <div className="container-fluid">
-        <legend>ChatRoom</legend>
+        <legend>Chat global</legend>
         <div className="row">
           <div className="col-md-12">
             <div className="row">
@@ -119,4 +119,4 @@ class ChatRoom extends Component {
   }
 }
 
-export default ChatRoom;
+export default ChatGlobal;

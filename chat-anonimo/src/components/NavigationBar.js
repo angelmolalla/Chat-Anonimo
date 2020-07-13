@@ -7,7 +7,7 @@ class NavigationBar extends Component {
     const valid = validateUser();
     if (valid) {
       this.state = {
-        nick: "Sin Usuario",
+        nick: "No user",
       };
     } else {
       this.state = {

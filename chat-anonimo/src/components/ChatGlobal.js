@@ -3,6 +3,7 @@ import * as firebase from "firebase";
 import "./Chat.css";
 import validateUser from "./ValidateUser";
 import Moment from "react-moment";
+import uuid from 'node-uuid';
 class ChatGlobal extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +54,7 @@ class ChatGlobal extends Component {
     const messageList = messages.map((message) => {
       if (message.user == sessionStorage.getItem("nick")) {
         return (
-          <div className="alert alert-dismissible alert-success" key={this.state.messages.length}>
+          <div className="alert alert-dismissible alert-success" key={uuid()}>
             <button type="button" className="close" data-dismiss="alert">
               &times;
             </button>
@@ -73,7 +74,7 @@ class ChatGlobal extends Component {
         );
       } else {
         return (
-          <div className="alert alert-dismissible alert-secondary" key={this.state.messages.length}>
+          <div className="alert alert-dismissible alert-secondary" key={uuid()}>
             <div className="row">
               <div className="col-md-6">
                 <strong className="mr-auto">{message.user}</strong>

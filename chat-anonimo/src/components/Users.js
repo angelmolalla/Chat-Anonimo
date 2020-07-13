@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
 import "./Chat.css";
-
+import uuid from 'node-uuid';
 
 class Users extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Users extends Component {
                   </thead>
                   <tbody>
                     {this.state.users.map((row) => (
-                      <tr className="table-secondary" key={row.id}>
+                      <tr className="table-secondary" key={uuid()}>
                         <th scope="row" className="text-center">{row.id}</th>
                         <th scope="row" className="text-center">{row.nick}</th>
                         <th scope="row" className="text-center">

@@ -3,6 +3,7 @@ import * as firebase from "firebase";
 import validateUser from "./ValidateUser";
 import Swal from "sweetalert2";
 import Moment from "react-moment";
+import uuid from 'node-uuid';
 
 class ChatUser extends Component {
   constructor(props) {
@@ -134,7 +135,7 @@ class ChatUser extends Component {
     const messageList = messages.map((message) => {
       if (message.user == sessionStorage.getItem("nick")) {
         return (
-          <div className="alert alert-dismissible alert-success" >
+          <div className="alert alert-dismissible alert-success"  key={uuid()}>
             <button type="button" className="close" data-dismiss="alert">
               &times;
             </button>
@@ -154,7 +155,7 @@ class ChatUser extends Component {
         );
       } else {
         return (
-          <div className="alert alert-dismissible alert-secondary">
+          <div className="alert alert-dismissible alert-secondary" key={uuid()}>
             <div className="row">
               <div className="col-md-6">
                 <strong className="mr-auto">{message.user}</strong>

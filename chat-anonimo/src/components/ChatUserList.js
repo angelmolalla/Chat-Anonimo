@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
 import validateUser from "./ValidateUser";
+import uuid from 'node-uuid';
 class ChatNewUserList extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +61,7 @@ class ChatNewUserList extends Component {
                   </thead>
                   <tbody>
                     {this.state.users.map((row) => (
-                      <tr className="table-secondary" key={row.id}>
+                      <tr className="table-secondary" key={uuid()}>
                         <th scope="row" className="text-center">
                           {row.id}
                         </th>

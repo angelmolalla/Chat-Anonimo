@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as firebase from "firebase";
 import "./Chat.css";
 import Swal from "sweetalert2";
+import uuid from 'node-uuid';
 class AddCategory extends Component {
   constructor(props) {
     super(props);
@@ -92,7 +93,7 @@ class AddCategory extends Component {
                   </thead>
                   <tbody>
                     {this.state.categories.map((row) => (
-                      <tr className="table-secondary" key={row.id}>
+                      <tr className="table-secondary" key={uuid()}>
                         <th scope="row" className="text-center">
                           {row.id}
                         </th>

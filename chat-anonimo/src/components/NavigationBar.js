@@ -46,12 +46,17 @@ class NavigationBar extends Component {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/categories">
-                Chat category's
+                Chat Category's
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/chatUserList">
+                My Chats
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/addCategory">
-                AddCategory
+                Add Category
               </a>
             </li>
             <li className="nav-item">

@@ -11,6 +11,8 @@ import NewUser from "./components/NewUser";
 import AddCategory from "./components/AddCategory";
 import Categories from "./components/Categories";
 import ChatCategory from "./components/ChatCategory";
+import ChatUser from "./components/ChatUser";
+import ChatUserList from "./components/ChatUserList";
 
 export const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 export const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
@@ -46,6 +48,8 @@ function App() {
         <Route exact path="/chatCategory/:id" component={ChatCategory}></Route>
         <Route exact path="/addUser" component={AddUser}></Route>
         <Route exact path="/users" component={Users}></Route>
+        <Route exact path="/chatUserList" component={ChatUserList}></Route>
+        <Route exact path="/chatUser/:id" component={ChatUser}></Route>
         <Route exact path="/addCategory" component={AddCategory}></Route>
         <Route exact path="/categories" component={Categories}></Route>
         </Switch>

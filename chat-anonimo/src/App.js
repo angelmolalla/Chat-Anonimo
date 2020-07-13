@@ -1,18 +1,17 @@
 import React from "react";
-import {BrowserRouter  as Router,Route,Switch }from "react-router-dom";
-import Home from "./components/Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as firebase from "firebase";
 import About from "./components/About";
 import NavigationBar from "./components/NavigationBar";
-import ChatGlobal from "./components/ChatGlobal";
-import AddUser from "./components/AddUser";
-import * as firebase from "firebase";
-import Users from "./components/Users";
-import NewUser from "./components/NewUser";
-import AddCategory from "./components/AddCategory";
-import Categories from "./components/Categories";
-import ChatCategory from "./components/ChatCategory";
-import ChatUser from "./components/ChatUser";
-import ChatUserList from "./components/ChatUserList";
+import ChatGlobal from "./components/category/ChatGlobal";
+import AddCategory from "./components/category/AddCategory";
+import Categories from ".//components/category/Categories";
+import ChatCategory from "./components/category/ChatCategory";
+import AddUser from "./components/user/AddUser";
+import Users from "./components/user/Users";
+import NewUser from "./components/user/NewUser";
+import ChatUser from "./components/user/ChatUser";
+import ChatUserList from "./components/user/ChatUserList";
 
 export const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 export const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
@@ -42,16 +41,20 @@ function App() {
       <NavigationBar></NavigationBar>
       <Router>
         <Switch>
-        <Route exact path="/" component={NewUser}></Route>
-        <Route exact path="/about" component={About}></Route>
-        <Route exact path="/chatGlobal" component={ChatGlobal}></Route>
-        <Route exact path="/chatCategory/:id" component={ChatCategory}></Route>
-        <Route exact path="/addUser" component={AddUser}></Route>
-        <Route exact path="/users" component={Users}></Route>
-        <Route exact path="/chatUserList" component={ChatUserList}></Route>
-        <Route exact path="/chatUser/:id" component={ChatUser}></Route>
-        <Route exact path="/addCategory" component={AddCategory}></Route>
-        <Route exact path="/categories" component={Categories}></Route>
+          <Route exact path="/" component={NewUser}></Route>
+          <Route exact path="/about" component={About}></Route>
+          <Route exact path="/chatGlobal" component={ChatGlobal}></Route>
+          <Route
+            exact
+            path="/chatCategory/:id"
+            component={ChatCategory}
+          ></Route>
+          <Route exact path="/addUser" component={AddUser}></Route>
+          <Route exact path="/users" component={Users}></Route>
+          <Route exact path="/chatUserList" component={ChatUserList}></Route>
+          <Route exact path="/chatUser/:id" component={ChatUser}></Route>
+          <Route exact path="/addCategory" component={AddCategory}></Route>
+          <Route exact path="/categories" component={Categories}></Route>
         </Switch>
       </Router>
     </React.Fragment>

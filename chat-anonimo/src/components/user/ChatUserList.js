@@ -1,37 +1,45 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./Chat.css";
-import uuid from 'node-uuid';
-class Categories extends Component {
+import validateUser from "../ValidateUser";
+import uuid from "node-uuid";
+class ChatNewUserList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
+      users: [],
     };
+  }
+  nextPath(path, id) {
+    this.props.history.push(path + id);
   }
 
   componentDidMount() {
+    const valid = validateUser();
+    if (valid) {
+      this.props.history.push("/");
+      return;
+    }
     firebase
       .database()
-      .ref("categories/")
+      .ref("users/")
       .on("value", (snapshot) => {
-        const currentUser = snapshot.val();
+        let currentUser = snapshot.val();
         if (currentUser !== null) {
+          currentUser = currentUser.filter(
+            (user) => user.nick !== sessionStorage.getItem("nick")
+          );
+
           this.setState({
-            categories: currentUser,
+            users: currentUser,
           });
         }
       });
   }
 
-  nextPath(path,id) {
-    this.props.history.push(path+id);
-  }
-
   render() {
     return (
       <div className="container-fluid">
-        <legend>Categories</legend>
+        <legend>List Message:</legend>
         <div className="row">
           <div className="col-md-12">
             <div className="row">
@@ -43,7 +51,10 @@ class Categories extends Component {
                         ID
                       </th>
                       <th scope="col" className="text-center">
-                        CATEGORY
+                        NICK
+                      </th>
+                      <th scope="col" className="text-center">
+                        ANONYMOUS
                       </th>
                       <th scope="col" className="text-center">
                         OPERATION
@@ -51,17 +62,31 @@ class Categories extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.categories.map((row) => (
+                    {this.state.users.map((row) => (
                       <tr className="table-secondary" key={uuid()}>
                         <th scope="row" className="text-center">
                           {row.id}
                         </th>
                         <th scope="row" className="text-center">
-                          {row.category}
+                          {row.nick}
                         </th>
                         <th scope="row" className="text-center">
-                          <button type="button" onClick={() => this.nextPath('/chatCategory/',row.category) } className="btn btn-success">
-                            Go
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            checked={row.anonymous}
+                            disabled="disabled"
+                          />
+                        </th>
+                        <th scope="row" className="text-center">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              this.nextPath("/chatUser/", row.nick)
+                            }
+                            className="btn btn-success"
+                          >
+                            Send Chat
                           </button>
                         </th>
                       </tr>
@@ -77,4 +102,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+export default ChatNewUserList;

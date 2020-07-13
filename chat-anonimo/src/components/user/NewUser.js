@@ -19,11 +19,10 @@ class NewUser extends Component {
       anonymous: true,
     };
     this.setState({ users: listUser });
-    sessionStorage.setItem('nick',nick);
-    sessionStorage.setItem('id', this.state.users.length);
-    sessionStorage.setItem('anonymous',true);
+    sessionStorage.setItem("nick", nick);
+    sessionStorage.setItem("id", this.state.users.length);
+    sessionStorage.setItem("anonymous", true);
     firebase.database().ref(`users/${user.id}`).set(user);
-
   }
   messageUser() {
     Swal.fire({
@@ -37,10 +36,10 @@ class NewUser extends Component {
       cancelButtonText: "No, I want to create a new user!",
     }).then((result) => {
       if (result.value) {
-        let lastKey =this.state.users.length;
-        let nick="anonymous"+lastKey;
+        let lastKey = this.state.users.length;
+        let nick = "anonymous" + lastKey;
         this.addUser(nick);
-        Swal.fire("Login as anonymous", "His nick is: "+nick, "success");
+        Swal.fire("Login as anonymous", "His nick is: " + nick, "success");
       } else {
         this.props.history.push("/addUser");
       }

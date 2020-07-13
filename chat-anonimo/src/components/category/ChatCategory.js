@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./Chat.css";
-import validateUser from "./ValidateUser";
+import validateUser from "../ValidateUser";
+import Swal from "sweetalert2";
 import Moment from "react-moment";
-import uuid from 'node-uuid';
-class ChatGlobal extends Component {
+import uuid from "node-uuid";
+class ChatCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.match.params.id,
+      categories: [],
       message: "",
       messages: [],
     };
@@ -15,10 +17,7 @@ class ChatGlobal extends Component {
     this.updateMessage = this.updateMessage.bind(this);
   }
 
-  updateMessage(event) {
-    this.setState({ message: event.target.value });
-  }
-
+  handleSubmit(event) {}
   componentDidMount() {
     const valid = validateUser();
     if (valid) {
@@ -26,7 +25,36 @@ class ChatGlobal extends Component {
     }
     firebase
       .database()
-      .ref("messages_global/")
+      .ref("categories/")
+      .on("value", (snapshot) => {
+        const currentUser = snapshot.val();
+        if (currentUser !== null) {
+          this.setState({
+            categories: currentUser,
+          });
+          const validateNick = currentUser
+            .map(function (e) {
+              return e.category;
+            })
+            .find((element) => element == this.state.id);
+          if (!validateNick) {
+            Swal.fire({
+              title: "Error",
+              icon: "error",
+              text: "Category is not in the database",
+            });
+            this.props.history.push("/categories");
+          } else {
+            this.changeMessagesChatCategory();
+          }
+        }
+      });
+  }
+
+  changeMessagesChatCategory() {
+    firebase
+      .database()
+      .ref(`messages_${this.state.id}/`)
       .on("value", (snapshot) => {
         const currentMessages = snapshot.val();
         if (currentMessages !== null) {
@@ -36,6 +64,7 @@ class ChatGlobal extends Component {
         }
       });
   }
+
   handleSubmit(event) {
     event.preventDefault();
     const listMessage = this.state.messages;
@@ -46,9 +75,16 @@ class ChatGlobal extends Component {
       date: Date.now(),
     };
     this.setState({ messages: listMessage });
-    firebase.database().ref(`messages_global/${message.id}`).set(message);
+    firebase
+      .database()
+      .ref(`messages_${this.state.id}/${message.id}`)
+      .set(message);
     this.setState({ message: "" });
   }
+  updateMessage(event) {
+    this.setState({ message: event.target.value });
+  }
+
   render() {
     const { messages } = this.state;
     const messageList = messages.map((message) => {
@@ -93,7 +129,7 @@ class ChatGlobal extends Component {
     });
     return (
       <div className="container-fluid">
-        <legend>Chat global</legend>
+        <h1>Chat {this.state.id}</h1>
         <div className="row">
           <div className="col-md-12">
             <div className="row">
@@ -120,4 +156,4 @@ class ChatGlobal extends Component {
   }
 }
 
-export default ChatGlobal;
+export default ChatCategory;

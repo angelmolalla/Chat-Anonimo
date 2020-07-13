@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./Chat.css";
+import "../style/Chat.css";
 import Swal from "sweetalert2";
-import uuid from 'node-uuid';
+import uuid from "node-uuid";
+
 class AddCategory extends Component {
   constructor(props) {
     super(props);
@@ -115,7 +116,9 @@ class AddCategory extends Component {
                       value={this.state.category}
                       onChange={this.updateCategory}
                     />
-                     <small className="form-text text-muted">Blank spaces will be removed</small>
+                    <small className="form-text text-muted">
+                      Blank spaces will be removed
+                    </small>
                   </div>
                   <button className="btn btn-primary">Add</button>
                 </form>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
-import "./Chat.css";
+import "../style/Chat.css";
 import Swal from "sweetalert2";
 
 class AddUser extends Component {
@@ -37,7 +37,7 @@ class AddUser extends Component {
     const user = {
       id: this.state.users.length,
       nick: this.state.user,
-      anonymous:false,
+      anonymous: false,
     };
     const validateNick = this.state.users
       .map(function (e) {
@@ -65,9 +65,9 @@ class AddUser extends Component {
 
     this.setState({ users: listUser });
     firebase.database().ref(`users/${user.id}`).set(user);
-    sessionStorage.setItem('id', this.state.users.length);
-    sessionStorage.setItem('nick', this.state.user);
-    sessionStorage.setItem('anonymous',false);
+    sessionStorage.setItem("id", this.state.users.length);
+    sessionStorage.setItem("nick", this.state.user);
+    sessionStorage.setItem("anonymous", false);
     Swal.fire(
       "Correct Operation!",
       "New user added, nick: " + this.state.user,
